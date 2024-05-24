@@ -1,7 +1,7 @@
 {
   "name": "app-ec2",
   "version": "1.0.0",
-  "description": "",
+  "description": "Simple node.js app that servers \"A simple Node App is running on EC2 server\"",
   "main": "index.js",
   "scripts": {
     "start": "node src/server.js",
@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "app-ec2": "^1.0.0",
     "express": "^4.18.2"
   }
 }
