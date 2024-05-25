@@ -1,11 +1,11 @@
 pipeline {
-    // agent any
-    agent {
-        docker {
-            image 'docker:latest' // Use a Docker image with Docker CLI installed
-            args '-v /var/run/docker.sock:/var/run/docker.sock' // Mount Docker socket
-        }
-    }
+    agent any
+    // agent {
+    //     docker {
+    //         image 'docker:latest' // Use a Docker image with Docker CLI installed
+    //         args '-v /var/run/docker.sock:/var/run/docker.sock' // Mount Docker socket
+    //     }
+    // }
     // agent {
         
     //     docker { image 'node:20.11.1-alpine3.19' }
@@ -39,6 +39,16 @@ pipeline {
     //         }
     // }
     stages {
+         stage('Check Docker Status') {
+            steps {
+                script {
+                    def dockerStatus = sh(script: 'sudo systemctl is-active docker', returnStdout: true).trim()
+                    if (dockerStatus != 'active') {
+                        error 'Docker is not running!'
+                    }
+                }
+            }
+        }
         stage('Debug') {
         steps {
             sh 'echo $PATH'
