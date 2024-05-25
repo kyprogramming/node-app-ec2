@@ -40,7 +40,7 @@ pipeline {
             // }
             steps {
                 script {
-                    dockerImage = docker.build("${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${env.BUILD_NUMBER}")
+                    dockerImage = docker.build("${DOCKER_REGISTRY}/${DOCKER_IMAGE}:1.0")
                 }
             }
         }
