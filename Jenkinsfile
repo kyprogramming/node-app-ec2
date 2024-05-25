@@ -12,6 +12,7 @@ pipeline {
     }
     tools {
         nodejs 'NodeJS'
+        git 'Git'
     } 
     // stage('Checkout') {
     //         steps {
