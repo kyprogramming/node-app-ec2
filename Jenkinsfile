@@ -1,5 +1,11 @@
 pipeline {
     agent any
+     tools {
+        nodejs 'nodejs'
+        // docker 'Docker'
+        dockerTool 'docker'
+        // git 'Git'
+    }   
     // agent {
     //     docker {
     //         image 'your-docker-image-with-dind'
@@ -14,7 +20,7 @@ pipeline {
         }
         stage('build') {
             steps {
-                sh 'sudo apt install npm'
+                sh 'npm install'
             }
         }
     }
