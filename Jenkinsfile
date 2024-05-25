@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        nodejs 'NodeJS'
+        nodejs 'nodejs'
         // docker 'Docker'
         dockerTool 'Docker'
         // git 'Git'
