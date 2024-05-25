@@ -12,6 +12,11 @@ pipeline {
     //         args '--privileged -v /var/run/docker.sock:/var/run/docker.sock'
     //     }
     // }
+     environment {
+        DOCKERHUB_CREDENTIALS = credentials('kkyprogramming@gmail.com') // Replace 'dockerhub-id' with your credentials ID in Jenkins
+        DOCKER_IMAGE = 'node-app-jenkins' // Replace with your Docker image name
+        DOCKER_REGISTRY = 'kyprogramming' // Replace with your Docker registry
+    }
     stages {
         stage('checkout') {
             steps {
@@ -30,10 +35,30 @@ pipeline {
             }
         }
         stage('docker-build') {
-            steps {
-                sh 'docker --version'
-                sh 'docker build -t node-app .'
+            // steps {
+            //     sh 'docker --version'
+            //     sh 'docker build -t node-app .'
+            // }
+             steps {
+                script {
+                    dockerImage = docker.build("${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${env.BUILD_NUMBER}")
+                }
             }
+        }
+         stage('Push Docker Image') {
+            steps {
+                script {
+                    docker.withRegistry('https://index.docker.io/v1/', 'DOCKERHUB_CREDENTIALS') {
+                        dockerImage.push()
+                        dockerImage.push('latest')
+                    }
+                }
+            }
+        }
+    }
+     post {
+        always {
+            cleanWs()
         }
     }
 }
