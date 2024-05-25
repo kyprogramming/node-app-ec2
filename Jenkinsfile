@@ -68,16 +68,16 @@ pipeline {
                 }
             }
         }
-        stage('Run Docker Container') {
-            steps {
-                script {
-                    docker.image('my-node-app').inside('-p 8090:8090') {
-                        // Your test or other steps can go here
-                        sh 'curl http://localhost:8090'
-                    }
-                }
-            }
-        }
+        // stage('Run Docker Container') {
+        //     steps {
+        //         script {
+        //             docker.image('my-node-app').inside('-p 8090:8090') {
+        //                 // Your test or other steps can go here
+        //                 sh 'curl http://localhost:8090'
+        //             }
+        //         }
+        //     }
+        // }
         // stage('Push Docker Image') {
         //     steps {
         //         script {
