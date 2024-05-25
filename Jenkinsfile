@@ -39,10 +39,11 @@ pipeline {
     //         }
     // }
     stages {
-         stage('Check Docker Status') {
+        stage('Check Docker Status') {
             steps {
                 script {
-                    def dockerStatus = sh(script: 'sudo systemctl is-active docker', returnStdout: true).trim()
+                    // Check if Docker is running
+                    def dockerStatus = sh(script: 'systemctl is-active docker', returnStdout: true).trim()
                     if (dockerStatus != 'active') {
                         error 'Docker is not running!'
                     }
