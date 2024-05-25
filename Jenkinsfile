@@ -1,14 +1,12 @@
 pipeline {
-    agent {
-        docker {
-            image 'docker:latest' // Use an image with Docker installed
-            args '--privileged -v /var/run/docker.sock:/var/run/docker.sock' // Mount Docker socket
-        }
-    }
+    agent any
+
     stages {
-        stage('Build Docker Image') {
+        stage('Check Docker Image') {
             steps {
-                sh 'docker build -t my-image .'
+                script {
+                    sh 'docker inspect -f . docker:latest'
+                }
             }
         }
     }
