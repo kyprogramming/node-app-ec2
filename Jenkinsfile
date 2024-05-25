@@ -56,6 +56,7 @@ pipeline {
             steps {
                  sh 'docker --version'
                  sh 'su - '
+                 sh 'kyprogramming'
                  sh 'apt-get update'
                  sh 'apt-get install sudo'
                  sh 'exit'
