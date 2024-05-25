@@ -3,16 +3,26 @@ pipeline {
     tools {
         nodejs 'NodeJS'
     } 
-    stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/kyprogramming/node-app-ec2.git'
-            }
+    // stage('Checkout') {
+    //         steps {
+    //             git 'https://github.com/kyprogramming/node-app-ec2.git'
+    //         }
+    // }
+    stage('Debug') {
+        steps {
+            sh 'echo $PATH'
+            sh 'node -v'
+            sh 'npm -v'
         }
-        stage('Example') {
-            steps {
-                sh 'npm install'
-            }
+    }
+    stage('Build') {
+        steps {
+            sh 'npm install'
+        }
+    }
+    stage('Test') {
+        steps {
+            sh 'npm test'
         }
     }
 }
