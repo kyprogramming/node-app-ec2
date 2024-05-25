@@ -1,12 +1,14 @@
 pipeline {
     // agent any
     agent {
-        docker {
-            // Use the 'node' image with the 'alpine' tag
-            image 'node:alpine'
-            // Mount the Docker socket inside the container to use Docker commands
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
-        }
+        
+        docker { image 'node:20.11.1-alpine3.19' }
+        // docker {
+        //     // Use the 'node' image with the 'alpine' tag
+        //     image 'node:alpine'
+        //     // Mount the Docker socket inside the container to use Docker commands
+        //     args '-v /var/run/docker.sock:/var/run/docker.sock'
+        // }
     }
    
     // agent {
