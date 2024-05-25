@@ -1,13 +1,13 @@
 pipeline {
-    agent any
-    // agent {
-    //     docker {
-    //         image 'node:latest'
-    //         args '-u root:root'  // Use root user to avoid permission issues
-    //     }
-    // }
+    // agent any
+    agent {
+        docker {
+            image 'node:alpine'
+            args '-u root:root'  // Use root user to avoid permission issues
+        }
+    }
     environment {
-        DOCKER_IMAGE = 'kkyprogramming/mode-app-ec2:v4'
+        DOCKER_IMAGE = 'kkyprogramming/node-app-ec2:v4'
         DOCKER_CREDENTIALS_ID = 'Jaymataki@123'
     }
     tools {
