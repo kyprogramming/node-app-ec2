@@ -5,6 +5,10 @@ pipeline {
         // docker 'Docker'
         dockerTool 'docker'
         // git 'Git'
+    }
+    environment {
+        DOCKER_IMAGE = 'my-node-app:1.0' // Replace with your Docker image name
+        DOCKER_REGISTRY = 'kkyprogramming' // Replace with your Docker registry URL
     }   
     // agent {
     //     docker {
@@ -30,9 +34,14 @@ pipeline {
             }
         }
         stage('docker-build') {
+            // steps {
+            //     sh 'docker --version'
+            //     sh 'docker build -t my-node-app:1.0 .'
+            // }
             steps {
-                sh 'docker --version'
-                sh 'docker build -t my-node-app:1.0 .'
+                script {
+                    dockerImage = docker.build("${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${env.BUILD_NUMBER}")
+                }
             }
         }
         stage('Push Docker Image') {
@@ -44,19 +53,19 @@ pipeline {
                 //         sh "docker logout"
                 // }
 
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                    sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
-                    // dockerImage.push()
-                    // dockerImage.push('latest')
-                    sh "docker logout"
-                }
+                // withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                //     sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
+                //     // dockerImage.push()
+                //     // dockerImage.push('latest')
+                //     sh "docker logout"
+                // }
 
-                //  withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                // withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                 //     script {
-                //         sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
+                //         sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD} ${DOCKER_REGISTRY}"
                 //         dockerImage.push()
                 //         dockerImage.push('latest')
-                //         sh "docker logout"
+                //         sh "docker logout ${DOCKER_REGISTRY}"
                 //     }
                 // }
             }
