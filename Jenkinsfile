@@ -52,12 +52,20 @@ pipeline {
             }
         }
 
-         stage('Build Docker Image') {
+         stage(' Docker Version') {
             steps {
                  sh 'docker --version'
                 // script {
                 //     docker.build("${env.DOCKER_IMAGE}:${env.BUILD_NUMBER}")
                 // }
+            }
+        }
+         stage('Docker Build') {
+            steps {
+                // Use Docker tool to run Docker commands
+                script {
+                    docker.build('my-image:latest', '.')
+                }
             }
         }
         // stage('Push Docker Image') {

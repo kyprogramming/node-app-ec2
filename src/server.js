@@ -9,7 +9,7 @@ app.get('/contact' , (req,res)=>{
     res.send(`please contact Kumar Programming @kyprogramming`);
 });
 
-const PORT = process.env.PORT || 80;
+const PORT = process.env.PORT || 8090;
 
 app.listen(PORT , ()=>{
     console.log(`Server started at port ${PORT}`);
