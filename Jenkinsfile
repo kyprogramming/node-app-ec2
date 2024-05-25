@@ -10,7 +10,8 @@ pipeline {
         stage('Check Docker Image') {
             steps {
                 script {
-                    sh 'docker inspect -f . docker:latest'
+                    sh 'su -'
+                    // sh 'docker inspect -f . docker:latest'
                 }
             }
         }
