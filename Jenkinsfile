@@ -12,11 +12,6 @@ pipeline {
     //         args '--privileged -v /var/run/docker.sock:/var/run/docker.sock'
     //     }
     // }
-     environment {
-        DOCKERHUB_CREDENTIALS = credentials('admin') // Replace 'dockerhub-id' with your credentials ID in Jenkins
-        DOCKER_IMAGE = 'node-app-jenkins' // Replace with your Docker image name
-        DOCKER_REGISTRY = 'kkyprogramming' // Replace with your Docker registry
-    }
     stages {
         stage('checkout') {
             steps {
@@ -35,32 +30,23 @@ pipeline {
             }
         }
         stage('docker-build') {
-            // steps {
-            //     sh 'docker --version'
-            //     sh 'docker build -t node-app .'
-            // }
-             steps {
-                script {
-                    dockerImage = docker.build("${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${env.BUILD_NUMBER}")
-                }
+            steps {
+                sh 'docker --version'
+                sh 'docker build -t my-node-app:1.0 .'
             }
         }
-         stage('Push Docker Image') {
+        stage('Push Docker Image') {
             steps {
-                script {
-                    docker.withRegistry('https://index.docker.io/v1/', 'DOCKERHUB_CREDENTIALS') {
-                        dockerImage.push()
-                        dockerImage.push('latest')
-                    }
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                        sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
+                        sh "docker tag my-node-app:1.0 kkyprogramming/my-node-app:1.0"
+                        sh "docker push kkyprogramming/my-node-app:1.0"
+                        sh "docker logout"
                 }
             }
         }
     }
-    //  post {
-    //     always {
-    //         cleanWs()
-    //     }
-    // }
+    
 }
 // pipeline {
 //     agent any
