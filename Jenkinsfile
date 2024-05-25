@@ -64,7 +64,17 @@ pipeline {
             steps {
                 // Use Docker tool to run Docker commands
                 script {
-                    docker.build('my-image:latest', '.')
+                    docker.build('my-node-app', '.')
+                }
+            }
+        }
+        stage('Run Docker Container') {
+            steps {
+                script {
+                    docker.image('my-node-app').inside('-p 8090:8090') {
+                        // Your test or other steps can go here
+                        sh 'curl http://localhost:8090'
+                    }
                 }
             }
         }
