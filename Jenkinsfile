@@ -1,17 +1,20 @@
 pipeline {
-    agent {
-        docker {
-            image 'your-docker-image-with-dind'
-            args '--privileged -v /var/run/docker.sock:/var/run/docker.sock'
-        }
-    }
+    agent any
+    // agent {
+    //     docker {
+    //         image 'your-docker-image-with-dind'
+    //         args '--privileged -v /var/run/docker.sock:/var/run/docker.sock'
+    //     }
+    // }
     stages {
-        stage('Build') {
+         stage('checkout') {
             steps {
-                script {
-                    sh 'docker version'
-                    sh 'docker build -t my-app .'
-                }
+                checkout scm
+            }
+        }
+        stage('build') {
+            steps {
+                sh 'npm install'
             }
         }
     }
