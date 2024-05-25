@@ -21,6 +21,8 @@ pipeline {
         stage('build') {
             steps {
                 sh 'npm install'
+                sh 'npm run build'
+                sh 'node src/server.js'
             }
         }
     }
