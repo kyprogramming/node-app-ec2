@@ -1,11 +1,12 @@
 pipeline {
-    agent any 
+    agent any
+    tools {
+        NodeJS '22.2.0'
+    } 
     stages {
-        
-        stage('Build') {
+        stage('Example') {
             steps {
-                // Install dependencies and build Node.js application
-                sh 'npm install'
+                sh 'npm versoin'
             }
         }
     }
