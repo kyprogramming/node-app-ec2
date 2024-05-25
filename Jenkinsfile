@@ -6,6 +6,10 @@ pipeline {
             args '-u root:root'  // Use root user to avoid permission issues
         }
     }
+    environment {
+        DOCKER_IMAGE = 'kkyprogramming/mode-app-ec2:v4'
+        DOCKER_CREDENTIALS_ID = 'Jaymataki@123'
+    }
     tools {
         nodejs 'NodeJS'
     } 
@@ -32,6 +36,29 @@ pipeline {
                 sh 'npm test'
             }
         }
+
+         stage('Build Docker Image') {
+            steps {
+                script {
+                    docker.build("${env.DOCKER_IMAGE}:${env.BUILD_NUMBER}")
+                }
+            }
+        }
+        // stage('Push Docker Image') {
+        //     steps {
+        //         script {
+        //             docker.withRegistry('https://index.docker.io/v1/', env.DOCKER_CREDENTIALS_ID) {
+        //                 docker.image("${env.DOCKER_IMAGE}:${env.BUILD_NUMBER}").push()
+        //                 docker.image("${env.DOCKER_IMAGE}:${env.BUILD_NUMBER}").push('latest')
+        //             }
+        //         }
+        //     }
+        // }
+        // stage('Deploy') {
+        //     steps {
+        //         sh 'docker-compose up -d'
+        //     }
+        // }
     }
 }
 
