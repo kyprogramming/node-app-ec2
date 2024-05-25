@@ -1,15 +1,15 @@
 pipeline {
-    agent any
-    // agent {
-    //     docker {
-    //         image 'node:alpine'
-    //         args '-u root:root'  // Use root user to avoid permission issues
-    //     }
-    // }
-    // environment {
-    //     DOCKER_IMAGE = 'kkyprogramming/node-app-ec2:v4'
-    //     DOCKER_CREDENTIALS_ID = 'Jaymataki@123'
-    // }
+    // agent any
+    agent {
+        docker {
+            image 'node:alpine'
+            args '-u root:root'  // Use root user to avoid permission issues
+        }
+    }
+    environment {
+        DOCKER_IMAGE = 'kkyprogramming/node-app-ec2:v4'
+        DOCKER_CREDENTIALS_ID = 'Jaymataki@123'
+    }
     tools {
         nodejs 'NodeJS'
         // docker 'Docker'
@@ -39,13 +39,13 @@ pipeline {
             }
         }
 
-        //  stage('Build Docker Image') {
-        //     steps {
-        //         script {
-        //             docker.build("${env.DOCKER_IMAGE}:${env.BUILD_NUMBER}")
-        //         }
-        //     }
-        // }
+         stage('Build Docker Image') {
+            steps {
+                script {
+                    docker.build("${env.DOCKER_IMAGE}:${env.BUILD_NUMBER}")
+                }
+            }
+        }
         // stage('Push Docker Image') {
         //     steps {
         //         script {
