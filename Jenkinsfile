@@ -50,13 +50,14 @@ pipeline {
             }
         }
 
-        //  stage('Build Docker Image') {
-        //     steps {
-        //         script {
-        //             docker.build("${env.DOCKER_IMAGE}:${env.BUILD_NUMBER}")
-        //         }
-        //     }
-        // }
+         stage('Build Docker Image') {
+            steps {
+                 sh 'docker --version'
+                // script {
+                //     docker.build("${env.DOCKER_IMAGE}:${env.BUILD_NUMBER}")
+                // }
+            }
+        }
         // stage('Push Docker Image') {
         //     steps {
         //         script {
