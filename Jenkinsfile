@@ -17,7 +17,6 @@ pipeline {
             steps {
                 script {
                     // Build Docker image
-                    sh 'usermod -aG docker $USER'
                     sh 'systemctl restart docker'
                     sh 'ls -l /var/run/docker.sock'
                     sh 'sudo chown root:docker /var/run/docker.sock'
