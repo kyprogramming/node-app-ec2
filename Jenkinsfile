@@ -13,9 +13,9 @@ pipeline {
     //     }
     // }
      environment {
-        DOCKERHUB_CREDENTIALS = credentials('kkyprogramming@gmail.com') // Replace 'dockerhub-id' with your credentials ID in Jenkins
+        DOCKERHUB_CREDENTIALS = credentials('admin') // Replace 'dockerhub-id' with your credentials ID in Jenkins
         DOCKER_IMAGE = 'node-app-jenkins' // Replace with your Docker image name
-        DOCKER_REGISTRY = 'kyprogramming' // Replace with your Docker registry
+        DOCKER_REGISTRY = 'kkyprogramming' // Replace with your Docker registry
     }
     stages {
         stage('checkout') {
