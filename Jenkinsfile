@@ -22,7 +22,7 @@ pipeline {
             steps {
                 sh 'npm install'
                 sh 'npm run build'
-                sh 'node src/server.js'
+                sh 'npm run start'
             }
         }
     }
