@@ -4,6 +4,11 @@ pipeline {
         nodejs 'NodeJS'
     } 
     stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/kyprogramming/node-app-ec2.git'
+            }
+        }
         stage('Example') {
             steps {
                 sh 'npm install'
