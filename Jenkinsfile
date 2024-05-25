@@ -12,7 +12,6 @@ pipeline {
     }
     tools {
         nodejs 'NodeJS'
-        docker 'Docker'
     } 
     // stage('Checkout') {
     //         steps {
