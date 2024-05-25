@@ -55,6 +55,7 @@ pipeline {
          stage(' Docker Version') {
             steps {
                  sh 'docker --version'
+                 sh 'sudo systemctl status docker'
                 // script {
                 //     docker.build("${env.DOCKER_IMAGE}:${env.BUILD_NUMBER}")
                 // }
