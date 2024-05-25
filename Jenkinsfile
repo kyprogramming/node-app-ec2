@@ -11,7 +11,8 @@ pipeline {
             steps {
                 script {
                     sh 'docker --version'
-                    sh 'docker ps'
+                    sh 'systemctl status docker'
+                
                 }
             }
         }
