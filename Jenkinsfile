@@ -13,16 +13,20 @@ pipeline {
     //     }
     // }
     stages {
-         stage('checkout') {
+        stage('checkout') {
             steps {
                 checkout scm
+                sh 'npm install'
+            }
+        }
+        stage('test') {
+            steps {
+                sh 'npm run test'
             }
         }
         stage('build') {
             steps {
-                sh 'npm install'
                 sh 'npm run build'
-                sh 'npm run test'
             }
         }
     }
