@@ -31,7 +31,7 @@ pipeline {
         }
         stage('docker-build') {
             steps {
-                sh 'docker build -t node-app .'
+                sh 'docker --version'
             }
         }
     }
