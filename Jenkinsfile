@@ -55,7 +55,10 @@ pipeline {
          stage(' Docker Version') {
             steps {
                  sh 'docker --version'
-                 sh 'sudo systemctl status docker'
+                 sh 'su - '
+                 sh 'apt-get update'
+                 sh 'apt-get install sudo'
+                 sh 'exit'
                 // script {
                 //     docker.build("${env.DOCKER_IMAGE}:${env.BUILD_NUMBER}")
                 // }
