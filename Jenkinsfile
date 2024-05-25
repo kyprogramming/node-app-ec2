@@ -21,7 +21,7 @@ pipeline {
     //         }
     // }
     stages {
-        stage('Debug1') {
+        stage('Debug') {
         steps {
             sh 'echo $PATH'
             sh 'node -v'
