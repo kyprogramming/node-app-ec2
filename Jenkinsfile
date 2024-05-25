@@ -1,5 +1,11 @@
 pipeline {
-    agent any
+    // agent any
+    agent {
+        docker {
+            image 'node:latest'
+            args '-u root:root'  // Use root user to avoid permission issues
+        }
+    }
     tools {
         nodejs 'NodeJS'
     } 
