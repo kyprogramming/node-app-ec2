@@ -1,5 +1,11 @@
 pipeline {
-    agent any
+    // agent any
+    agent {
+        docker {
+            image 'docker:latest' // Use a Docker image with Docker CLI installed
+            args '-v /var/run/docker.sock:/var/run/docker.sock' // Mount Docker socket
+        }
+    }
     // agent {
         
     //     docker { image 'node:20.11.1-alpine3.19' }
@@ -55,11 +61,11 @@ pipeline {
          stage(' Docker Version') {
             steps {
                  sh 'docker --version'
-                 sh 'su - '
-                 sh 'kyprogramming'
-                 sh 'apt-get update'
-                 sh 'apt-get install sudo'
-                 sh 'exit'
+                //  sh 'su - '
+                //  sh 'kyprogramming'
+                //  sh 'apt-get update'
+                //  sh 'apt-get install sudo'
+                //  sh 'exit'
                 // script {
                 //     docker.build("${env.DOCKER_IMAGE}:${env.BUILD_NUMBER}")
                 // }
