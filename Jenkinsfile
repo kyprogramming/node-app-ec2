@@ -13,6 +13,13 @@ pipeline {
     //     }
     // }
     stages {
+         stage('Restart Docker') {
+            steps {
+                script {
+                    sh 'docker restart jenkins'
+                }
+            }
+        }
         stage('Build Docker Image') {
             steps {
                 script {
