@@ -56,11 +56,11 @@ pipeline {
             }
         }
     }
-     post {
-        always {
-            cleanWs()
-        }
-    }
+    //  post {
+    //     always {
+    //         cleanWs()
+    //     }
+    // }
 }
 // pipeline {
 //     agent any
