@@ -8,21 +8,23 @@ pipeline {
     //             git 'https://github.com/kyprogramming/node-app-ec2.git'
     //         }
     // }
-    stage('Debug') {
+    stages {
+        stage('Debug') {
         steps {
             sh 'echo $PATH'
             sh 'node -v'
             sh 'npm -v'
         }
-    }
-    stage('Build') {
-        steps {
-            sh 'npm install'
         }
-    }
-    stage('Test') {
-        steps {
-            sh 'npm test'
+        stage('Build') {
+            steps {
+                sh 'npm install'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'npm test'
+            }
         }
     }
 }
