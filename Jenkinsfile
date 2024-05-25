@@ -26,6 +26,7 @@ pipeline {
             sh 'echo $PATH'
             sh 'node -v'
             sh 'npm -v'
+            sh 'docker --version'
         }
         }
         stage('Build') {
