@@ -57,17 +57,20 @@ pipeline {
                 // }
 
                 withCredentials([usernamePassword(credentialsId: "${env.DOCKER_REGISTRY_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                    // sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
-                    // sh 'echo $DOCKER_PASSWORD'
-                    sh 'echo  $DOCKER_REGISTRY_URL'
-                    sh 'echo $DOCKER_USERNAME'
-                    sh 'echo $DOCKER_PASSWORD'
-                    sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
-
-                    // dockerImage.push()
-                    // dockerImage.push('latest')
-                    sh "docker logout"
+                    sh 'echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin'
                 }
+                // withCredentials([usernamePassword(credentialsId: "${env.DOCKER_REGISTRY_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                //     // sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
+                //     // sh 'echo $DOCKER_PASSWORD'
+                //     sh 'echo  $DOCKER_REGISTRY_URL'
+                //     sh 'echo $DOCKER_USERNAME'
+                //     sh 'echo $DOCKER_PASSWORD'
+                //     sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
+
+                //     // dockerImage.push()
+                //     // dockerImage.push('latest')
+                //     sh "docker logout"
+                // }
 
                 // withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                 //     script {
