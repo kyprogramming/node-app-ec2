@@ -44,7 +44,7 @@ pipeline {
             steps {
                 script {
                     sh 'docker --version'
-                    sh 'docker build -t my-node-app:1.0 .'
+                    sh "docker build -t ${env.DOCKER_IMAGE}:${env.DOCKER_IMAGE_VERSION} ."
                 }
             }
         }
@@ -52,7 +52,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: "${env.DOCKER_REGISTRY_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                     sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
-                    sh "docker tag ${env.DOCKER_IMAGE}:${env.DOCKER_IMAGE_VERSION} kkyprogramming/${env.DOCKER_IMAGE}:${env.DOCKER_IMAGE_VERSION}"
+                    sh "docker tag ${env.DOCKER_IMAGE}:${env.DOCKER_IMAGE_VERSION} ${env.DOCKER_REPO}/${env.DOCKER_IMAGE}:${env.DOCKER_IMAGE_VERSION}"
                     sh "docker push ${env.DOCKER_REPO}/${env.DOCKER_IMAGE}:${env.DOCKER_IMAGE_VERSION}"
                     sh "docker logout"
                 }
