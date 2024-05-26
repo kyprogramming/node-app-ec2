@@ -11,16 +11,16 @@ pipeline {
         DOCKER_REGISTRY_URL = 'https://hub.docker.com/'
         DOCKER_REGISTRY_CREDENTIALS_ID = 'dockerhub-credentials'
 
-        AWS_ACCESS_KEY_ID     = credentials('aws-access-key-id')
-        AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
-        AWS_DEFAULT_REGION    = 'your-aws-region'
-        EC2_INSTANCE_ID       = 'your-ec2-instance-id'
-        DOCKER_IMAGE_NAME     = 'your-docker-image-name'
+        // AWS_ACCESS_KEY_ID     = credentials('aws-access-key-id')
+        // AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
+        // AWS_DEFAULT_REGION    = 'your-aws-region'
+        // EC2_INSTANCE_ID       = 'your-ec2-instance-id'
+        // DOCKER_IMAGE_NAME     = 'your-docker-image-name'
 
 
-        EC2_HOST = 'ec2-13-50-226-61.eu-north-1.compute.amazonaws.com'
-        SSH_CREDENTIALS_ID = 'ec2-ssh-key'
-        CONTAINER_NAME = 'your-container-name'
+        // EC2_HOST = 'ec2-13-50-226-61.eu-north-1.compute.amazonaws.com'
+        // SSH_CREDENTIALS_ID = 'ec2-ssh-key'
+        // CONTAINER_NAME = 'your-container-name'
 
 
     }   
