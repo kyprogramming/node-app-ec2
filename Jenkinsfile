@@ -10,6 +10,13 @@ pipeline {
         DOCKER_IMAGE_VERSION = '1.0'
         DOCKER_REGISTRY_URL = 'https://hub.docker.com/'
         DOCKER_REGISTRY_CREDENTIALS_ID = 'dockerhub-credentials'
+
+        AWS_ACCESS_KEY_ID     = credentials('aws-access-key-id')
+        AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
+        AWS_DEFAULT_REGION    = 'your-aws-region'
+        EC2_INSTANCE_ID       = 'your-ec2-instance-id'
+        DOCKER_IMAGE_NAME     = 'your-docker-image-name'
+
     }   
     stages {
         stage('checkout-repo') {
@@ -55,6 +62,18 @@ pipeline {
             steps {
                 script {
                     sh "docker pull ${env.DOCKER_REPO}/${env.DOCKER_IMAGE}:${env.DOCKER_IMAGE_VERSION}"
+                }
+            }
+        }
+        stage('Deploy to EC2') {
+            steps {
+                script {
+                    withAWS(credentials: [
+                        awsAccessKeyId(credentialsId: 'aws-access-key-id', accessKeyVariable: 'AWS_ACCESS_KEY_ID'),
+                        awsSecretAccessKey(credentialsId: 'aws-secret-access-key', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')
+                    ], region: AWS_DEFAULT_REGION) {
+                        sh "docker run -d --rm --name my-container -p 80:80 ${env.DOCKER_IMAGE}:${env.DOCKER_IMAGE_VERSION}"
+                    }
                 }
             }
         }
