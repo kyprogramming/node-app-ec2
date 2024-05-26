@@ -68,6 +68,7 @@ pipeline {
             steps {
                 script {
                     sh "docker pull ${env.DOCKER_REPO}/${env.DOCKER_IMAGE}:${env.DOCKER_IMAGE_VERSION}"
+                    sh "docker run -d --rm --name my-container -p 80:80 ${env.DOCKER_IMAGE}:${env.DOCKER_IMAGE_VERSION}"
                 }
             }
         }
