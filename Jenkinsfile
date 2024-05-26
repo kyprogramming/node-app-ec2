@@ -58,8 +58,10 @@ pipeline {
 
                 withCredentials([usernamePassword(credentialsId: "${env.DOCKER_REGISTRY_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                     // sh 'chown -R $(id -u):$(id -g) $HOME/.docker'
-                     sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
-                     sh "docker logout"
+                    sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
+                    sh "docker tag my-node-app:1.0 kkyprogramming/my-node-app:1.0"
+                    sh "docker push kkyprogramming/my-node-app:1.0"
+                    sh "docker logout"
                 }
                 // withCredentials([usernamePassword(credentialsId: "${env.DOCKER_REGISTRY_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                 //     // sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
