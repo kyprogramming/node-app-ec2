@@ -40,3 +40,6 @@ sudo systemctl status jenkins
 
 
 http://13.50.226.61:8080/
+
+
+http://13.50.226.61/webhook
