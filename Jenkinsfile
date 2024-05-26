@@ -17,6 +17,13 @@ pipeline {
         EC2_INSTANCE_ID       = 'your-ec2-instance-id'
         DOCKER_IMAGE_NAME     = 'your-docker-image-name'
 
+
+        EC2_HOST = 'ec2-13-50-226-61.eu-north-1.compute.amazonaws.com'
+        SSH_CREDENTIALS_ID = 'ec2-ssh-key'
+        DOCKER_IMAGE = 'your-docker-image:latest'
+        CONTAINER_NAME = 'your-container-name'
+
+
     }   
     stages {
         stage('checkout-repo') {
@@ -65,18 +72,18 @@ pipeline {
                 }
             }
         }
-        stage('Deploy to EC2') {
-            steps {
-                script {
-                    withAWS(credentials: [
-                        awsAccessKeyId(credentialsId: 'aws-access-key-id', accessKeyVariable: 'AWS_ACCESS_KEY_ID'),
-                        awsSecretAccessKey(credentialsId: 'aws-secret-access-key', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')
-                    ], region: AWS_DEFAULT_REGION) {
-                        sh "docker run -d --rm --name my-container -p 80:80 ${env.DOCKER_IMAGE}:${env.DOCKER_IMAGE_VERSION}"
-                    }
-                }
-            }
-        }
+        // stage('Deploy to EC2') {
+        //     steps {
+        //         script {
+        //             withAWS(credentials: [
+        //                 awsAccessKeyId(credentialsId: 'aws-access-key-id', accessKeyVariable: 'AWS_ACCESS_KEY_ID'),
+        //                 awsSecretAccessKey(credentialsId: 'aws-secret-access-key', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')
+        //             ], region: AWS_DEFAULT_REGION) {
+        //                 sh "docker run -d --rm --name my-container -p 80:80 ${env.DOCKER_IMAGE}:${env.DOCKER_IMAGE_VERSION}"
+        //             }
+        //         }
+        //     }
+        // }
 
     }   
 }
