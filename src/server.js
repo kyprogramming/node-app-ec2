@@ -9,6 +9,9 @@ app.get('/contact' , (req,res)=>{
     res.send(`please contact Kumar Programming @kyprogramming`);
 });
 
+app.post('/webhook' , (req,res)=>{
+    res.send(`please contact Kumar Programming @kyprogramming`);
+});
 const PORT = process.env.PORT || 80;
 
 app.listen(PORT , ()=>{
