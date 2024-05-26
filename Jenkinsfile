@@ -59,7 +59,10 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: "${env.DOCKER_REGISTRY_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                     // sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
                     // sh 'echo $DOCKER_PASSWORD'
-                    sh 'echo $DOCKER_PASSWORD | docker login $DOCKER_REGISTRY_URL -u $DOCKER_USERNAME --password-stdin'
+                    sh 'echo  $DOCKER_REGISTRY_URL'
+                    sh 'echo $DOCKER_USERNAME'
+                    sh 'echo $DOCKER_PASSWORD'
+                    sh 'docker login $DOCKER_REGISTRY_URL -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
 
                     // dockerImage.push()
                     // dockerImage.push('latest')
