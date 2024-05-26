@@ -7,8 +7,9 @@ pipeline {
         // git 'Git'
     }
     environment {
-        DOCKER_IMAGE = 'my-node-app:1.0' // Replace with your Docker image name
         DOCKER_REGISTRY = 'kkyprogramming' // Replace with your Docker registry URL
+        DOCKER_IMAGE = 'test-node-app' // Replace with your Docker image name
+        DOCKER_IMAGE_VERSION = '1.0'
         DOCKER_REGISTRY_URL = 'https://hub.docker.com/'
         DOCKER_REGISTRY_CREDENTIALS_ID = 'dockerhub-credentials'
     }   
@@ -49,40 +50,19 @@ pipeline {
         }
         stage('Push Docker Image') {
             steps {
-                // withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                //         sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
-                //         // sh "docker tag my-node-app:1.0 kkyprogramming/my-node-app:1.0"
-                //         // sh "docker push kkyprogramming/my-node-app:1.0"
-                //         sh "docker logout"
-                // }
-
                 withCredentials([usernamePassword(credentialsId: "${env.DOCKER_REGISTRY_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                    // sh 'chown -R $(id -u):$(id -g) $HOME/.docker'
                     sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
-                    sh "docker tag my-node-app:1.0 kkyprogramming/my-node-app:1.0"
-                    sh "docker push kkyprogramming/my-node-app:1.0"
+                    sh "docker tag ${env.DOCKER_IMAGE}:${env.DOCKER_IMAGE_VERSION} ${env.DOCKER_REGISTRY}/${env.DOCKER_IMAGE}:${env.DOCKER_IMAGE_VERSION}"
+                    sh "docker push ${env.DOCKER_REGISTRY}/${env.DOCKER_IMAGE}:${env.DOCKER_IMAGE_VERSION}"
                     sh "docker logout"
                 }
+                // working
                 // withCredentials([usernamePassword(credentialsId: "${env.DOCKER_REGISTRY_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                //     // sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
-                //     // sh 'echo $DOCKER_PASSWORD'
-                //     sh 'echo  $DOCKER_REGISTRY_URL'
-                //     sh 'echo $DOCKER_USERNAME'
-                //     sh 'echo $DOCKER_PASSWORD'
-                //     sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
-
-                //     // dockerImage.push()
-                //     // dockerImage.push('latest')
+                //     // sh 'chown -R $(id -u):$(id -g) $HOME/.docker'
+                //     sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
+                //     sh "docker tag my-node-app:1.0 kkyprogramming/my-node-app:1.0"
+                //     sh "docker push kkyprogramming/my-node-app:1.0"
                 //     sh "docker logout"
-                // }
-
-                // withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                //     script {
-                //         sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD} ${DOCKER_REGISTRY}"
-                //         dockerImage.push()
-                //         dockerImage.push('latest')
-                //         sh "docker logout ${DOCKER_REGISTRY}"
-                //     }
                 // }
             }
         }
