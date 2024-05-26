@@ -9,9 +9,9 @@ app.get('/contact' , (req,res)=>{
     res.send(`please contact Kumar Programming @kyprogramming`);
 });
 
-app.post('/github-webhook' , (req,res)=>{
-    res.send(`webhook successfully returned.`);
-});
+// app.post('/github-webhook' , (req,res)=>{
+//     res.send(`webhook successfully returned.`);
+// });
 const PORT = process.env.PORT || 80;
 
 app.listen(PORT , ()=>{
