@@ -9,7 +9,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'my-node-app:1.0' // Replace with your Docker image name
         DOCKER_REGISTRY = 'kkyprogramming' // Replace with your Docker registry URL
-        DOCKER_REGISTRY_URL = 'https://your-docker-registry.com'
+        DOCKER_REGISTRY_URL = 'https://hub.docker.com/'
         DOCKER_REGISTRY_CREDENTIALS_ID = 'dockerhub-credentials'
     }   
     // agent {
@@ -56,7 +56,7 @@ pipeline {
                 //         sh "docker logout"
                 // }
 
-                withCredentials([usernamePassword(credentialsId: ${env.DOCKER_REGISTRY_CREDENTIALS_ID}, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: "${env.DOCKER_REGISTRY_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                     sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
                     // dockerImage.push()
                     // dockerImage.push('latest')
