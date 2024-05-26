@@ -51,5 +51,13 @@ pipeline {
                 }
             }
         }
+        stage('docker-image-pull') {
+            steps {
+                script {
+                    sh "docker pull ${env.DOCKER_REPO}/${env.DOCKER_IMAGE}:${env.DOCKER_IMAGE_VERSION}"
+                }
+            }
+        }
+
     }   
 }
