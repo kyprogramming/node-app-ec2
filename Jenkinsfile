@@ -62,7 +62,7 @@ pipeline {
                     sh 'echo  $DOCKER_REGISTRY_URL'
                     sh 'echo $DOCKER_USERNAME'
                     sh 'echo $DOCKER_PASSWORD'
-                    sh 'docker login $DOCKER_REGISTRY_URL -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
+                    sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
 
                     // dockerImage.push()
                     // dockerImage.push('latest')
