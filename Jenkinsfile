@@ -57,7 +57,7 @@ pipeline {
                 // }
 
                 withCredentials([usernamePassword(credentialsId: "${env.DOCKER_REGISTRY_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                    sh 'chown -R $(id -u):$(id -g) $HOME/.docker'
+                    // sh 'chown -R $(id -u):$(id -g) $HOME/.docker'
                     sh 'echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME'
                 }
                 // withCredentials([usernamePassword(credentialsId: "${env.DOCKER_REGISTRY_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
