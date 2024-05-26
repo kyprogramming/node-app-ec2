@@ -12,7 +12,7 @@ pipeline {
         DOCKER_REGISTRY_CREDENTIALS_ID = 'dockerhub-credentials'
     }   
     stages {
-        stage('checkout') {
+        stage('checkout-repo') {
             steps {
                 checkout scm
             }
