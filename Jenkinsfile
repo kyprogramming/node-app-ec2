@@ -7,7 +7,7 @@ pipeline {
         // git 'Git'
     }
     environment {
-        DOCKER_REGISTRY = 'kkyprogramming' // Replace with your Docker registry URL
+        DOCKER_REPO = 'kkyprogramming' // Replace with your Docker registry URL
         DOCKER_IMAGE = 'test-node-app' // Replace with your Docker image name
         DOCKER_IMAGE_VERSION = '1.0'
         DOCKER_REGISTRY_URL = 'https://hub.docker.com/'
@@ -52,7 +52,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: "${env.DOCKER_REGISTRY_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                     sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
-                    sh "docker tag ${env.DOCKER_IMAGE}:${env.DOCKER_IMAGE_VERSION} ${env.DOCKER_REGISTRY}/${env.DOCKER_IMAGE}:${env.DOCKER_IMAGE_VERSION}"
+                    sh "docker tag ${env.DOCKER_IMAGE}:${env.DOCKER_IMAGE_VERSION} ${env.DOCKER_REPO}/${env.DOCKER_IMAGE}:${env.DOCKER_IMAGE_VERSION}"
                     sh "docker push ${env.DOCKER_REGISTRY}/${env.DOCKER_IMAGE}:${env.DOCKER_IMAGE_VERSION}"
                     sh "docker logout"
                 }
