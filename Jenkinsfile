@@ -52,7 +52,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: "${env.DOCKER_REGISTRY_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                     // sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
-                    sh "echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin"
+                    sh "echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME"
                     sh "docker tag ${env.DOCKER_IMAGE}:${env.DOCKER_IMAGE_VERSION} ${env.DOCKER_REPO}/${env.DOCKER_IMAGE}:${env.DOCKER_IMAGE_VERSION}"
                     sh "docker push ${env.DOCKER_REPO}/${env.DOCKER_IMAGE}:${env.DOCKER_IMAGE_VERSION}"
                     sh "docker logout"
