@@ -20,7 +20,6 @@ pipeline {
 
         EC2_HOST = 'ec2-13-50-226-61.eu-north-1.compute.amazonaws.com'
         SSH_CREDENTIALS_ID = 'ec2-ssh-key'
-        DOCKER_IMAGE = 'your-docker-image:latest'
         CONTAINER_NAME = 'your-container-name'
 
 
